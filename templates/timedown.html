@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>米 奇 妙 妙 屋</title>
+{#<script src="https://unpkg.com/vue/dist/vue.js"></script>#}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+html,
+body {
+    height: 100%;
+}
+body {
+    background: #0f3854;
+    background: -webkit-radial-gradient(center ellipse, #0a2e38 0%, #000000 70%);
+    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    background-size: 100%;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+#clock {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ffffff;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #daf6ff;
+    text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}
+#clock .time {
+    letter-spacing: 0.05em;
+    font-size: 80px;
+    padding: 5px 0;
+}
+#clock .date {
+    letter-spacing: 0.1em;
+    font-size: 24px;
+}
+#clock .text {
+    letter-spacing: 0.1em;
+    font-size: 18px;
+    padding: 20px 0 0;
+}
+</style>
+</head>
+<body>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Share+Tech+Mono'>
+
+<div id="clock">
+{#    <p class="date">{{ date }}</p>#}
+    {% verbatim myblock %}
+
+    <p class="time">{{ time }}</p>
+    <p class="text">{{ wyyword }}</p>
+    {% endverbatim myblock %}
+</div>
+
+<script>
+var clock = new Vue({
+    el: '#clock',
+    data: {
+        time: '',
+        date: '',
+        wyyword: ''
+    },
+    created(){
+        axios.get('/v1/wyyword/').then( (res) => {
+           this.wyyword = res.data['data']['word'];
+        })
+    }
+});
+
+var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+var timerID = setInterval(updateTime, 1000);
+var nowTime = new Date();
+ts = nowTime.getTime();
+console.log(ts);
+console.log(ts - parseInt(ts/86400000)*86400000);
+ts = 36000000 - (ts - parseInt(ts/86400000)*86400000);
+updateTime();
+
+function updateTime() {
+    cd = new Date(ts - 28800000);
+    clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+    clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+    ts = ts - 1000;
+};
+
+function zeroPadding(num, digit) {
+    var zero = '';
+    for (var i = 0; i < digit; i++) {
+        zero += '0';
+    }
+    return (zero + num).slice(-digit);
+}
+</script>
+
+</body>
+</html>

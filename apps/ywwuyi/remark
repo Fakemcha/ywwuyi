@@ -1,0 +1,107 @@
+私聊数据
+{
+	'font': 88609384,
+	'message': '私聊测试',
+	'message_id': 10,
+	'message_type': 'private',
+	'post_type': 'message',
+	'raw_message': '私聊测试',
+	'self_id': 3197335618,
+	'sender': {
+		'age': 23,
+		'nickname': 'Tamm',
+		'sex': 'male',
+		'user_id': 463705592
+	},
+	'sub_type': 'friend',
+	'time': 1578883998,
+	'user_id': 463705592
+}
+
+群聊数据
+{
+	'anonymous': None,
+	'font': 90277224,
+	'group_id': 532799508,
+	'message': '群聊测试',
+	'message_id': 14,
+	'message_type': 'group',
+	'post_type': 'message',
+	'raw_message': '群聊测试',
+	'self_id': 3197335618,
+	'sender': {
+		'age': 23,
+		'area': '',
+		'card': '保加利亚米奇',
+		'level': '冒泡',
+		'nickname': 'Tamm',
+		'role': 'owner',
+		'sex': 'unknown',
+		'title': '',
+		'user_id': 463705592
+	},
+	'sub_type': 'normal',
+	'time': 1578884196,
+	'user_id': 463705592
+}
+
+图片数据
+{
+	'anonymous': None,
+	'font': 90277352,
+	'group_id': 532799508,
+	'message': '[CQ:image,file=E12BA623ECBAFCA53C5141506FA9CB71.jpg,url=https://gchat.qpic.cn/gchatpic_new/463705592/532799508-2769740868-E12BA623ECBAFCA53C5141506FA9CB71/0?term=2]',
+	'message_id': 17,
+	'message_type': 'group',
+	'post_type': 'message',
+	'raw_message': '[CQ:image,file=E12BA623ECBAFCA53C5141506FA9CB71.jpg]',
+	'self_id': 3197335618,
+	'sender': {
+		'age': 23,
+		'area': '',
+		'card': '保加利亚米奇',
+		'level': '冒泡',
+		'nickname': 'Tamm',
+		'role': 'owner',
+		'sex': 'unknown',
+		'title': '',
+		'user_id': 463705592
+	},
+	'sub_type': 'normal',
+	'time': 1578884266,
+	'user_id': 463705592
+}
+
+传统api
+
+获取用户信息     get     /api/user/read
+
+更新用户信息     post    /api/user/update
+
+新增用户信息     post    /api/user/add
+
+删除用户信息     post    /api/user/delete
+
+restful api
+
+获取用户列表               get      /api/users
+
+根据id获取用户信息     get       /api/user/1
+
+更新用户信息      put       /api/user/1
+
+新增用户信息      post      /api/user
+
+根据id删除用户信息     delete    /api/user/1
+
+HTTP状态码
+
+200        请求成功        201        创建成功
+
+202        更新成功        204         资源删除成功
+
+400        无效请求        401         未授权
+
+403        禁止访问        404          请求资源不存在
+
+500        内部错误
